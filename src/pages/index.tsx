@@ -41,7 +41,6 @@ export default function Home() {
         [Party.DemocraticRussia, {label: 'Democratic Russia', votes: 49, color: '#3498DB', members: 1}],
         [Party.RadicalDemocrats, {label: 'Radical Democrats', votes: 50, color: '#F1C40F', members: 1}],
     ]);
-    // total votes = 822
 
     const playerParties: {
         name: string,
