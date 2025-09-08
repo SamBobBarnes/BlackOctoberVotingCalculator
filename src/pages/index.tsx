@@ -41,6 +41,7 @@ export default function Home() {
         [Party.DemocraticRussia, {label: 'Democratic Russia', votes: 49, color: '#3498DB', members: 1}],
         [Party.RadicalDemocrats, {label: 'Radical Democrats', votes: 50, color: '#F1C40F', members: 1}],
     ]);
+    // total votes = 822
 
     const playerParties: {
         name: string,
@@ -68,6 +69,10 @@ export default function Home() {
         {name: 'V .I. Morokin', party: Party.Rodina, vote: '', setVote: undefined},
         {name: 'Droren', party: Party.ConcordForProgress, vote: '', setVote: undefined},
     ]
+
+    const votesToGet66 = Math.ceil(congressBreakdown.entries().reduce((acc, [, value]) => acc + value.votes, 0) / 3);
+    const votesToGet50 = Math.ceil(congressBreakdown.entries().reduce((acc, [, value]) => acc + value.votes, 0) / 2) + 1;
+    const [totalVotes, setTotalVotes] = useState<number>(0);
 
     const [vote0, setVote0] = useState<string>('');
     playerParties[0].vote = vote0;
@@ -229,6 +234,7 @@ export default function Home() {
             }
         });
         setVotingTally(tally);
+        setTotalVotes(tally.reduce((acc, curr) => acc + curr.votes, 0));
     }, [vote0, vote1, vote2, vote3, vote4, vote5, vote6, vote7, vote8, vote9, vote10, vote11, vote12, vote13, vote14, vote15, vote16, vote17, vote18]);
 
 
@@ -252,7 +258,20 @@ export default function Home() {
                     </ChartContainer>
                 </CardContent>
                 <CardFooter className="flex-col gap-2 text-sm">
-                    <span>test text</span>
+                    <div>
+                        Total Votes: {totalVotes} | Votes needed for 50%+1: {votesToGet50} | Votes needed for 66%:
+                        {votesToGet66}
+                    </div>
+                    <div>
+                        Status:{' '}
+                        {totalVotes >= votesToGet66 ? (
+                            <span className="font-bold text-green-600">Passed with 66% Majority</span>
+                        ) : totalVotes >= votesToGet50 ? (
+                            <span className="font-bold text-yellow-600">Passed with Simple Majority</span>
+                        ) : (
+                            <span className="font-bold text-red-600">Did Not Pass</span>
+                        )}
+                    </div>
                 </CardFooter>
             </Card>
 
