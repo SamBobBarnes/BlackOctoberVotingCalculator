@@ -234,7 +234,7 @@ export default function Home() {
         });
         setVotingTally(tally);
         setTotalVotes(tally.reduce((acc, curr) => acc + curr.votes, 0));
-    }, [vote0, vote1, vote2, vote3, vote4, vote5, vote6, vote7, vote8, vote9, vote10, vote11, vote12, vote13, vote14, vote15, vote16, vote17, vote18]);
+    }, [vote0, vote1, vote2, vote3, vote4, vote5, vote6, vote7, vote8, vote9, vote10, vote11, vote12, vote13, vote14, vote15, vote16, vote17, vote18, congressBreakdown, playerParties]);
 
 
     return (
