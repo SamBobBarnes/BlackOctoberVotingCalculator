@@ -1,5 +1,11 @@
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
-import {ChartContainer, ChartTooltip, ChartTooltipContent} from "@/components/ui/chart";
+import {
+    ChartContainer,
+    ChartLegend,
+    ChartLegendContent,
+    ChartTooltip,
+    ChartTooltipContent
+} from "@/components/ui/chart";
 import {Pie, PieChart} from "recharts";
 import {Checkbox} from "@/components/ui/checkbox";
 import {Dispatch, SetStateAction, useEffect, useState} from "react";
@@ -24,22 +30,70 @@ export default function Home() {
         RadicalDemocrats = 'Radical Democrats',
     }
 
-    const congressBreakdown = new Map<Party, { label: string, votes: number, color: string, members: number }>([
+    const congressBreakdown = new Map<Party, {
+        label: string,
+        votes: number,
+        color: string,
+        members: number,
+        name: string
+    }>([
 
-        [Party.CommunistsOfRussia, {label: 'Communists of Russia', votes: 67, color: '#FF000B', members: 1}],
-        [Party.AgrarianUnion, {label: 'Agrarian Union', votes: 130, color: '#11806A', members: 2}],
-        [Party.Rossiya, {label: 'Rossiya', votes: 43, color: '#A83515', members: 2}],
-        [Party.Fatherland, {label: 'Fatherland', votes: 51, color: '#490200', members: 2}],
-        [Party.IndustrialUnion, {label: 'Industrial Union', votes: 52, color: '#546E7A', members: 1}],
-        [Party.WorkersUnion, {label: 'Worker\'s Union', votes: 53, color: '#FD3C3C', members: 1}],
-        [Party.Change, {label: 'Change', votes: 53, color: '#AAAAAA', members: 1}],
-        [Party.Rodina, {label: 'Rodina', votes: 57, color: '#D1923C', members: 2}],
-        [Party.SovereigntyAndEquality, {label: 'Sovereignty & Equality', votes: 50, color: '#00431D', members: 1}],
-        [Party.FreeRussia, {label: 'Free Russia', votes: 55, color: '#78C9FF', members: 2}],
-        [Party.LeftOfCenter, {label: 'Left of Center', votes: 62, color: '#E91E63', members: 1}],
-        [Party.ConcordForProgress, {label: 'Concord for Progress', votes: 54, color: '#9B59B6', members: 1}],
-        [Party.DemocraticRussia, {label: 'Democratic Russia', votes: 49, color: '#3498DB', members: 1}],
-        [Party.RadicalDemocrats, {label: 'Radical Democrats', votes: 50, color: '#F1C40F', members: 1}],
+        [Party.CommunistsOfRussia, {
+            label: 'Communists of Russia',
+            votes: 67,
+            color: '#FF000B',
+            members: 1,
+            name: 'communistsOfRussia'
+        }],
+        [Party.AgrarianUnion, {
+            label: 'Agrarian Union',
+            votes: 130,
+            color: '#11806A',
+            members: 2,
+            name: 'agrarianUnion'
+        }],
+        [Party.Rossiya, {label: 'Rossiya', votes: 43, color: '#A83515', members: 2, name: 'rossiya'}],
+        [Party.Fatherland, {label: 'Fatherland', votes: 51, color: '#490200', members: 2, name: 'fatherland'}],
+        [Party.IndustrialUnion, {
+            label: 'Industrial Union',
+            votes: 52,
+            color: '#546E7A',
+            members: 1,
+            name: 'industrialUnion'
+        }],
+        [Party.WorkersUnion, {label: 'Worker\'s Union', votes: 53, color: '#FD3C3C', members: 1, name: 'workersUnion'}],
+        [Party.Change, {label: 'Change', votes: 53, color: '#AAAAAA', members: 1, name: 'change'}],
+        [Party.Rodina, {label: 'Rodina', votes: 57, color: '#D1923C', members: 2, name: 'rodina'}],
+        [Party.SovereigntyAndEquality, {
+            label: 'Sovereignty & Equality',
+            votes: 50,
+            color: '#00431D',
+            members: 1,
+            name: 'sovereigntyAndEquality'
+        }],
+        [Party.FreeRussia, {label: 'Free Russia', votes: 55, color: '#78C9FF', members: 2, name: 'freeRussia'}],
+        [Party.LeftOfCenter, {label: 'Left of Center', votes: 62, color: '#E91E63', members: 1, name: 'leftOfCenter'}],
+        [Party.ConcordForProgress, {
+            label: 'Concord for Progress',
+            votes: 54,
+            color: '#9B59B6',
+            members: 1,
+            name: 'concordForProgress'
+        }],
+        [Party.DemocraticRussia, {
+            label: 'Democratic Russia',
+            votes: 49,
+            color: '#3498DB',
+            members: 1,
+            name: 'democraticRussia'
+        }],
+        [Party.RadicalDemocrats, {
+            label: 'Radical Democrats',
+            votes: 50,
+            color: '#F1C40F',
+            members: 1,
+            name: 'radicalDemocrats'
+        }],
     ]);
 
     const playerParties: {
@@ -69,7 +123,7 @@ export default function Home() {
         {name: 'Droren', party: Party.ConcordForProgress, vote: '', setVote: undefined},
     ]
 
-    const votesToGet66 = Math.ceil(congressBreakdown.entries().reduce((acc, [, value]) => acc + value.votes, 0) / 3);
+    const votesToGet66 = Math.ceil(congressBreakdown.entries().reduce((acc, [, value]) => acc + value.votes, 0) * 0.66);
     const votesToGet50 = Math.ceil(congressBreakdown.entries().reduce((acc, [, value]) => acc + value.votes, 0) / 2) + 1;
     const [totalVotes, setTotalVotes] = useState<number>(0);
 
@@ -226,7 +280,7 @@ export default function Home() {
             }
             if (votes.votesToBeGiven > 0) {
                 tally.push({
-                    party: congressBreakdown.get(party)!.label,
+                    party: congressBreakdown.get(party)!.name,
                     votes: votes.votesToBeGiven,
                     fill: congressBreakdown.get(party)!.color
                 });
@@ -234,7 +288,7 @@ export default function Home() {
         });
         setVotingTally(tally);
         setTotalVotes(tally.reduce((acc, curr) => acc + curr.votes, 0));
-    }, [vote0, vote1, vote2, vote3, vote4, vote5, vote6, vote7, vote8, vote9, vote10, vote11, vote12, vote13, vote14, vote15, vote16, vote17, vote18, congressBreakdown, playerParties]);
+    }, [vote0, vote1, vote2, vote3, vote4, vote5, vote6, vote7, vote8, vote9, vote10, vote11, vote12, vote13, vote14, vote15, vote16, vote17, vote18]);
 
 
     return (
@@ -248,11 +302,15 @@ export default function Home() {
                 <CardContent className="flex-1 pb-0 w-full">
                     <ChartContainer
                         config={chartConfig}
-                        className="[&_.recharts-pie-label-text]:fill-foreground mx-auto aspect-square max-h-[250px] pb-0 w-full"
+                        className="[&_.recharts-pie-label-text]:fill-foreground mx-auto aspect-square max-h-[500px] pb-0 w-full"
                     >
-                        <PieChart>
-                            <ChartTooltip content={<ChartTooltipContent hideLabel/>}/>
-                            <Pie data={votingTally} dataKey="votes" label nameKey="party"/>
+                        <PieChart data={votingTally} dataKey="votes">
+                            <ChartTooltip content={<ChartTooltipContent/>}/>
+                            <Pie data={votingTally} dataKey="votes" label labelLine={false} nameKey="party"/>
+                            <ChartLegend
+                                content={<ChartLegendContent nameKey="party"/>}
+                                className="-translate-y-2 flex-wrap gap-2 *:basis-1/4 *:justify-center"
+                            />
                         </PieChart>
                     </ChartContainer>
                 </CardContent>
@@ -281,7 +339,7 @@ export default function Home() {
                 <CardContent>
                     <div className='flex gap-4 border-b p-2 font-bold flex-wrap'>
                         {playerParties.map((player, index) => (
-                            <div key={index} style={{fontWeight: 'bold', flexBasis: '27rem'}}
+                            <div key={index} style={{fontWeight: 'bold', flexBasis: '28rem'}}
                                  className='flex gap-4 border-2 p-2 items-center rounded-xl justify-between'>
                                 <div className='flex gap-4 items-center'>
                                     {player.name} <span style={{
@@ -290,7 +348,7 @@ export default function Home() {
                                 </div>
                                 <div className='flex gap-2 items-center'>
                                     <Checkbox
-                                        className={'bg-green-200 data-[state=checked]:bg-green-600 cursor-pointer'}
+                                        className={'bg-green-200 data-[state=checked]:bg-green-600 cursor-pointer w-8 h-8'}
                                         checked={player.vote === 'yes'}
                                         onCheckedChange={(value) => {
                                             if (value as boolean) {
@@ -299,15 +357,16 @@ export default function Home() {
                                                 player.setVote!('abstain');
                                             }
                                         }}/>
-                                    <Checkbox className={'bg-red-200 data-[state=checked]:bg-red-600 cursor-pointer'}
-                                              checked={player.vote === 'no'}
-                                              onCheckedChange={(value) => {
-                                                  if (value as boolean) {
-                                                      player.setVote!('no');
-                                                  } else {
-                                                      player.setVote!('abstain');
-                                                  }
-                                              }}/>
+                                    <Checkbox
+                                        className={'bg-red-200 data-[state=checked]:bg-red-600 cursor-pointer w-8 h-8'}
+                                        checked={player.vote === 'no'}
+                                        onCheckedChange={(value) => {
+                                            if (value as boolean) {
+                                                player.setVote!('no');
+                                            } else {
+                                                player.setVote!('abstain');
+                                            }
+                                        }}/>
                                 </div>
                             </div>
                         ))}
