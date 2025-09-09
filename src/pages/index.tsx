@@ -307,7 +307,6 @@ export default function Home() {
         const votes = Cookies.get('votes');
         if (votes) {
             const parsedVotes: { name: string, vote: string }[] = JSON.parse(votes);
-            console.log(parsedVotes);
             parsedVotes.forEach((vote) => {
                 const player = playerParties.find((p) => p.name === vote.name);
                 if (player) {
