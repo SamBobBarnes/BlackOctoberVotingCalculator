@@ -123,8 +123,8 @@ export default function Home() {
         {name: 'Droren', party: Party.ConcordForProgress, vote: '', setVote: undefined},
     ]
 
-    const votesToGet66 = Math.ceil(congressBreakdown.entries().reduce((acc, [, value]) => acc + value.votes, 0) * 0.66);
-    const votesToGet50 = Math.ceil(congressBreakdown.entries().reduce((acc, [, value]) => acc + value.votes, 0) / 2) + 1;
+    const votesToGet66 = 546;
+    const votesToGet50 = 414;
     const [totalVotes, setTotalVotes] = useState<number>(0);
 
     const [vote0, setVote0] = useState<string>('');
