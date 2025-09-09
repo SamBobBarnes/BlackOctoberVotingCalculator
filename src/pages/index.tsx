@@ -8,10 +8,11 @@ import {
 } from "@/components/ui/chart";
 import {Pie, PieChart} from "recharts";
 import {Checkbox} from "@/components/ui/checkbox";
-import {Dispatch, SetStateAction, useEffect, useState} from "react";
+import {Dispatch, SetStateAction, useCallback, useEffect, useState} from "react";
 import {useToPng} from "@hugocxl/react-to-image";
 import {toast, Toaster} from "sonner"
 import {Button} from "@/components/ui/button";
+import Cookies from "js-cookie";
 
 
 export default function Home() {
@@ -129,64 +130,67 @@ export default function Home() {
     const votesToGet66 = 546;
     const votesToGet50 = 414;
     const [totalVotes, setTotalVotes] = useState<number>(0);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    const [vote0, setVote0] = useState<string>('');
+    //region Votes State
+    const [vote0, setVote0] = useState<string>('abstain');
     playerParties[0].vote = vote0;
     playerParties[0].setVote = setVote0;
-    const [vote1, setVote1] = useState<string>('');
+    const [vote1, setVote1] = useState<string>('abstain');
     playerParties[1].vote = vote1;
     playerParties[1].setVote = setVote1;
-    const [vote2, setVote2] = useState<string>('');
+    const [vote2, setVote2] = useState<string>('abstain');
     playerParties[2].vote = vote2;
     playerParties[2].setVote = setVote2;
-    const [vote3, setVote3] = useState<string>('');
+    const [vote3, setVote3] = useState<string>('abstain');
     playerParties[3].vote = vote3;
     playerParties[3].setVote = setVote3;
-    const [vote4, setVote4] = useState<string>('');
+    const [vote4, setVote4] = useState<string>('abstain');
     playerParties[4].vote = vote4;
     playerParties[4].setVote = setVote4;
-    const [vote5, setVote5] = useState<string>('');
+    const [vote5, setVote5] = useState<string>('abstain');
     playerParties[5].vote = vote5;
     playerParties[5].setVote = setVote5;
-    const [vote6, setVote6] = useState<string>('');
+    const [vote6, setVote6] = useState<string>('abstain');
     playerParties[6].vote = vote6;
     playerParties[6].setVote = setVote6;
-    const [vote7, setVote7] = useState<string>('');
+    const [vote7, setVote7] = useState<string>('abstain');
     playerParties[7].vote = vote7;
     playerParties[7].setVote = setVote7;
-    const [vote8, setVote8] = useState<string>('');
+    const [vote8, setVote8] = useState<string>('abstain');
     playerParties[8].vote = vote8;
     playerParties[8].setVote = setVote8;
-    const [vote9, setVote9] = useState<string>('');
+    const [vote9, setVote9] = useState<string>('abstain');
     playerParties[9].vote = vote9;
     playerParties[9].setVote = setVote9;
-    const [vote10, setVote10] = useState<string>('');
+    const [vote10, setVote10] = useState<string>('abstain');
     playerParties[10].vote = vote10;
     playerParties[10].setVote = setVote10;
-    const [vote11, setVote11] = useState<string>('');
+    const [vote11, setVote11] = useState<string>('abstain');
     playerParties[11].vote = vote11;
     playerParties[11].setVote = setVote11;
-    const [vote12, setVote12] = useState<string>('');
+    const [vote12, setVote12] = useState<string>('abstain');
     playerParties[12].vote = vote12;
     playerParties[12].setVote = setVote12;
-    const [vote13, setVote13] = useState<string>('');
+    const [vote13, setVote13] = useState<string>('abstain');
     playerParties[13].vote = vote13;
     playerParties[13].setVote = setVote13;
-    const [vote14, setVote14] = useState<string>('');
+    const [vote14, setVote14] = useState<string>('abstain');
     playerParties[14].vote = vote14;
     playerParties[14].setVote = setVote14;
-    const [vote15, setVote15] = useState<string>('');
+    const [vote15, setVote15] = useState<string>('abstain');
     playerParties[15].vote = vote15;
     playerParties[15].setVote = setVote15;
-    const [vote16, setVote16] = useState<string>('');
+    const [vote16, setVote16] = useState<string>('abstain');
     playerParties[16].vote = vote16;
     playerParties[16].setVote = setVote16;
-    const [vote17, setVote17] = useState<string>('');
+    const [vote17, setVote17] = useState<string>('abstain');
     playerParties[17].vote = vote17;
     playerParties[17].setVote = setVote17;
-    const [vote18, setVote18] = useState<string>('');
+    const [vote18, setVote18] = useState<string>('abstain');
     playerParties[18].vote = vote18;
     playerParties[18].setVote = setVote18;
+    //endregion
 
     const [votingTally, setVotingTally] = useState<{ party: string, votes: number, fill: string }[]>([]);
     const chartConfig = {
@@ -251,7 +255,8 @@ export default function Home() {
         },
     };
 
-    useEffect(() => {
+    const updateTally = useCallback(() => {
+        if (isLoading) return;
         const tally: { party: string, votes: number, fill: string }[] = [];
         const partyVotes = new Map<Party, {
             totalVotes: number,
@@ -291,7 +296,32 @@ export default function Home() {
         });
         setVotingTally(tally);
         setTotalVotes(tally.reduce((acc, curr) => acc + curr.votes, 0));
-    }, [vote0, vote1, vote2, vote3, vote4, vote5, vote6, vote7, vote8, vote9, vote10, vote11, vote12, vote13, vote14, vote15, vote16, vote17, vote18]);
+        Cookies.set('votes', JSON.stringify(playerParties.filter(x => x.vote !== 'abstain').map((player) => ({
+            name: player.name,
+            vote: player.vote
+        }))), {path: '/', expires: 7});
+    }, [isLoading, congressBreakdown, playerParties]);
+
+    useEffect(() => {
+        if (!isLoading) return;
+        const votes = Cookies.get('votes');
+        if (votes) {
+            const parsedVotes: { name: string, vote: string }[] = JSON.parse(votes);
+            console.log(parsedVotes);
+            parsedVotes.forEach((vote) => {
+                const player = playerParties.find((p) => p.name === vote.name);
+                if (player) {
+                    player.setVote!(vote.vote);
+                }
+            });
+        }
+        setIsLoading(false);
+    }, [isLoading, playerParties, updateTally]);
+
+
+    useEffect(() => {
+        updateTally();
+    }, [vote0, vote1, vote2, vote3, vote4, vote5, vote6, vote7, vote8, vote9, vote10, vote11, vote12, vote13, vote14, vote15, vote16, vote17, vote18, isLoading]);
 
     const b64toBlob = (b64Data: string, contentType = '', sliceSize = 512) => {
         const byteCharacters = atob(b64Data);
