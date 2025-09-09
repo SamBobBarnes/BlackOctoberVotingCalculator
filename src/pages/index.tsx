@@ -9,6 +9,9 @@ import {
 import {Pie, PieChart} from "recharts";
 import {Checkbox} from "@/components/ui/checkbox";
 import {Dispatch, SetStateAction, useEffect, useState} from "react";
+import {useToPng} from "@hugocxl/react-to-image";
+import {toast, Toaster} from "sonner"
+import {Button} from "@/components/ui/button";
 
 
 export default function Home() {
@@ -290,12 +293,49 @@ export default function Home() {
         setTotalVotes(tally.reduce((acc, curr) => acc + curr.votes, 0));
     }, [vote0, vote1, vote2, vote3, vote4, vote5, vote6, vote7, vote8, vote9, vote10, vote11, vote12, vote13, vote14, vote15, vote16, vote17, vote18]);
 
+    const b64toBlob = (b64Data: string, contentType = '', sliceSize = 512) => {
+        const byteCharacters = atob(b64Data);
+        const byteArrays = [];
+
+        for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+            const byteNumbers = new Array(slice.length);
+            for (let i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            const byteArray = new Uint8Array(byteNumbers);
+            byteArrays.push(byteArray);
+        }
+
+        const blob = new Blob(byteArrays, {type: contentType});
+        return blob;
+    }
+
+    const [, convert, ref] = useToPng<HTMLDivElement>({
+        onSuccess: data => {
+            // 'data' is the base64 encoded PNG
+            // You can use it to display the image, copy to clipboard, etc.
+            const header = 'data:image/png;base64,';
+            const base64 = data.substring(header.length);
+
+            const blob = b64toBlob(base64, 'image/png');
+
+            navigator.clipboard.write([new ClipboardItem({'image/png': blob})]);
+
+            toast.success("Image copied to clipboard!");
+        }
+    });
 
     return (
         <div className={'flex flex-col justify-center items-center my-10 gap-8'}>
+            <Toaster/>
             <h1>Vote Tallying</h1>
-
-            <Card className="flex flex-col w-full">
+            <div className="absolute top-4 right-4">
+                <Button onClick={convert} className="cursor-pointer">Capture as PNG</Button>
+            </div>
+            <Card className="flex flex-col w-[32rem]" ref={ref}>
                 <CardHeader className="items-center pb-0">
                     <CardTitle>Vote Totals</CardTitle>
                 </CardHeader>
@@ -315,9 +355,10 @@ export default function Home() {
                     </ChartContainer>
                 </CardContent>
                 <CardFooter className="flex-col gap-2 text-sm">
-                    <div>
-                        Total Votes: {totalVotes} | Votes needed for 50%+1: {votesToGet50} | Votes needed for 66%:
-                        {votesToGet66}
+                    <div className="text-center">
+                        Total Votes: <span className="font-bold text-blue-500">{totalVotes}</span><br/>
+                        Votes needed for 50%+1: <span className="font-bold">{votesToGet50}</span><br/>
+                        Votes needed for 66%: <span className="font-bold">{votesToGet66}</span>
                     </div>
                     <div>
                         Status:{' '}
@@ -331,7 +372,6 @@ export default function Home() {
                     </div>
                 </CardFooter>
             </Card>
-
             <Card className="flex flex-col w-full">
                 <CardHeader>
                     <CardTitle>Voting Players</CardTitle>
