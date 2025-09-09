@@ -300,7 +300,7 @@ export default function Home() {
             name: player.name,
             vote: player.vote
         }))), {path: '/', expires: 7});
-    }, [isLoading]);
+    }, [isLoading, congressBreakdown, playerParties]);
 
     useEffect(() => {
         if (!isLoading) return;
