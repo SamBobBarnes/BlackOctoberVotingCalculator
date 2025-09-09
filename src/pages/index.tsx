@@ -333,7 +333,7 @@ export default function Home() {
             <Toaster/>
             <h1>Vote Tallying</h1>
             <div className="absolute top-4 right-4">
-                <Button onClick={convert} className="cursor-pointer">Capture as PNG</Button>
+                <Button onClick={convert} className="cursor-pointer">Copy Tally to Clipboard</Button>
             </div>
             <Card className="flex flex-col w-[32rem]" ref={ref}>
                 <CardHeader className="items-center pb-0">
