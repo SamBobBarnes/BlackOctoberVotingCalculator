@@ -316,7 +316,7 @@ export default function Home() {
             });
         }
         setIsLoading(false);
-    }, [isLoading, playerParties, updateTally]);
+    }, [isLoading, updateTally]);
 
 
     useEffect(() => {
