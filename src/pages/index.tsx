@@ -203,9 +203,6 @@ export default function Home() {
     const [vote21, setVote21] = useState<string>('abstain');
     playerParties[21].vote = vote21;
     playerParties[21].setVote = setVote21;
-    const [vote22, setVote22] = useState<string>('abstain');
-    playerParties[22].vote = vote22;
-    playerParties[22].setVote = setVote22;
 
     //endregion
 
