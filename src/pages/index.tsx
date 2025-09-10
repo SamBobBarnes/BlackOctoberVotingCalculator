@@ -13,6 +13,8 @@ import {useToPng} from "@hugocxl/react-to-image";
 import {toast, Toaster} from "sonner"
 import {Button} from "@/components/ui/button";
 import Cookies from "js-cookie";
+import {Input} from "@/components/ui/input"
+import {cn} from "@/lib/utils";
 
 
 export default function Home() {
@@ -135,6 +137,7 @@ export default function Home() {
     const votesToGet50 = 414;
     const [totalVotes, setTotalVotes] = useState<number>(0);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [searchTerm, setSearchTerm] = useState<string>('');
 
     //region Votes State
     const [vote0, setVote0] = useState<string>('abstain');
@@ -417,13 +420,20 @@ export default function Home() {
             </Card>
             <Card className="flex flex-col w-full">
                 <CardHeader>
-                    <CardTitle>Voting Players</CardTitle>
+                    <CardTitle>
+                        <div className="items-center pb-0 w-full flex justify-start gap-5">
+                            <span className="w-32">Voting Players</span>
+                            <Input id="search" className="ml-5 max-w-96" placeholder="Find player"
+                                   onChange={(event) => setSearchTerm(event.currentTarget.value)}/>
+                        </div>
+                    </CardTitle>
+
                 </CardHeader>
                 <CardContent>
                     <div className='flex gap-4 border-b p-2 font-bold flex-wrap'>
                         {playerParties.map((player, index) => (
                             <div key={index} style={{fontWeight: 'bold', flexBasis: '28rem'}}
-                                 className='flex gap-4 border-2 p-2 items-center rounded-xl justify-between'>
+                                 className={cn('flex gap-4 border-2 p-2 items-center rounded-xl justify-between', searchTerm !== '' && player.name.toLowerCase().includes(searchTerm.toLowerCase()) ? 'bg-yellow-200' : '')}>
                                 <div className='flex gap-4 items-center'>
                                     {player.name} <span style={{
                                     color: congressBreakdown.get(player.party)?.color
