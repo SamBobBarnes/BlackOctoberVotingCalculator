@@ -339,6 +339,12 @@ export default function Home() {
         updateTally();
     }, [vote0, vote1, vote2, vote3, vote4, vote5, vote6, vote7, vote8, vote9, vote10, vote11, vote12, vote13, vote14, vote15, vote16, vote17, vote18, isLoading]);
 
+    const clearSelections = () => {
+        playerParties.forEach((player) => {
+            player.setVote!('abstain');
+        });
+    }
+
     const b64toBlob = (b64Data: string, contentType = '', sliceSize = 512) => {
         const byteCharacters = atob(b64Data);
         const byteArrays = [];
@@ -424,7 +430,11 @@ export default function Home() {
                         <div className="items-center pb-0 w-full flex justify-start gap-5">
                             <span className="w-32">Voting Players</span>
                             <Input id="search" className="ml-5 max-w-96" placeholder="Find player"
-                                   onChange={(event) => setSearchTerm(event.currentTarget.value)}/>
+                                   onChange={(event) => setSearchTerm(event.currentTarget.value)}
+                                   onFocus={(event) => {
+                                       event.target.select()
+                                   }}/>
+                            <Button onClick={clearSelections}>Clear Selections</Button>
                         </div>
                     </CardTitle>
 
