@@ -46,7 +46,7 @@ export default function Home() {
             label: 'Communists of Russia',
             votes: 67,
             color: '#FF000B',
-            members: 1,
+            members: 2,
             name: 'communistsOfRussia'
         }],
         [Party.AgrarianUnion, {
@@ -76,7 +76,7 @@ export default function Home() {
             name: 'sovereigntyAndEquality'
         }],
         [Party.FreeRussia, {label: 'Free Russia', votes: 55, color: '#78C9FF', members: 2, name: 'freeRussia'}],
-        [Party.LeftOfCenter, {label: 'Left of Center', votes: 62, color: '#E91E63', members: 1, name: 'leftOfCenter'}],
+        [Party.LeftOfCenter, {label: 'Left of Center', votes: 62, color: '#E91E63', members: 2, name: 'leftOfCenter'}],
         [Party.ConcordForProgress, {
             label: 'Concord for Progress',
             votes: 54,
@@ -88,7 +88,7 @@ export default function Home() {
             label: 'Democratic Russia',
             votes: 49,
             color: '#3498DB',
-            members: 1,
+            members: 2,
             name: 'democraticRussia'
         }],
         [Party.RadicalDemocrats, {
@@ -100,31 +100,35 @@ export default function Home() {
         }],
     ]);
 
+
     const playerParties: {
         name: string,
         party: Party,
         vote: string,
         setVote: undefined | Dispatch<SetStateAction<string>>
     }[] = [
-        {name: 'I.P. Rybkin', party: Party.CommunistsOfRussia, vote: '', setVote: undefined},
-        {name: 'Mikhail I. Lapshin', party: Party.AgrarianUnion, vote: '', setVote: undefined},
-        {name: 'Vladimir S. Zakharov', party: Party.AgrarianUnion, vote: '', setVote: undefined},
-        {name: 'S.N.Baburin', party: Party.Rossiya, vote: '', setVote: undefined},
-        {name: 'L.Kh.Bakhtiyarova', party: Party.Rossiya, vote: '', setVote: undefined},
-        {name: 'B.V . Tarasov', party: Party.Fatherland, vote: '', setVote: undefined},
-        {name: 'Gennadiy Matveyevich Benov', party: Party.Fatherland, vote: '', setVote: undefined},
-        {name: 'V .V . Bespalov', party: Party.IndustrialUnion, vote: '', setVote: undefined},
-        {name: 'V.V. Chernov', party: Party.WorkersUnion, vote: '', setVote: undefined},
-        {name: 'V.A. Shuykov', party: Party.Change, vote: '', setVote: undefined},
-        {name: 'U.E. Temirov', party: Party.SovereigntyAndEquality, vote: '', setVote: undefined},
-        {name: 'V.M. Adrov', party: Party.FreeRussia, vote: '', setVote: undefined},
-        {name: 'I.V . Vinogradova', party: Party.FreeRussia, vote: '', setVote: undefined},
-        {name: 'V.I. Gerasimov', party: Party.LeftOfCenter, vote: '', setVote: undefined},
-        {name: 'S.P.Shustov', party: Party.DemocraticRussia, vote: '', setVote: undefined},
-        {name: 'Sergei N. Yushenkov', party: Party.RadicalDemocrats, vote: '', setVote: undefined},
-        {name: 'Konstantin G. Bulgakov', party: Party.Rodina, vote: '', setVote: undefined},
-        {name: 'V .I. Morokin', party: Party.Rodina, vote: '', setVote: undefined},
-        {name: 'Droren', party: Party.ConcordForProgress, vote: '', setVote: undefined},
+        {name: '[CoR]  I.P. Rybkin', party: Party.CommunistsOfRussia, vote: '', setVote: undefined},
+        {name: '[CoR]  V. Kalashnikov', party: Party.CommunistsOfRussia, vote: '', setVote: undefined},
+        {name: '[AU] Mikhail I. Lapshin', party: Party.AgrarianUnion, vote: '', setVote: undefined},
+        {name: '[AU] Vladimir S. Zakharov', party: Party.AgrarianUnion, vote: '', setVote: undefined},
+        {name: '[Ros] S.N.Baburin', party: Party.Rossiya, vote: '', setVote: undefined},
+        {name: '[Ros] L.Kh.Bakhtiyarova', party: Party.Rossiya, vote: '', setVote: undefined},
+        {name: '[FL] B.V . Tarasov', party: Party.Fatherland, vote: '', setVote: undefined},
+        {name: '[FL] Gennadiy Matveyevich Benov', party: Party.Fatherland, vote: '', setVote: undefined},
+        {name: '[IU] V .V . Bespalov', party: Party.IndustrialUnion, vote: '', setVote: undefined},
+        {name: '[WU] V.V. Chernov', party: Party.WorkersUnion, vote: '', setVote: undefined},
+        {name: '[CNP] V.A. Shuykov', party: Party.Change, vote: '', setVote: undefined},
+        {name: '[S& E]Polkovnik Bezsmerten', party: Party.SovereigntyAndEquality, vote: '', setVote: undefined},
+        {name: '[FR] V.M. Adrov', party: Party.FreeRussia, vote: '', setVote: undefined},
+        {name: '[FR] I.V . Vinogradova', party: Party.FreeRussia, vote: '', setVote: undefined},
+        {name: '[LoC] K.A. Morozov', party: Party.LeftOfCenter, vote: '', setVote: undefined},
+        {name: '[LoC] V.I. Gerasimov', party: Party.LeftOfCenter, vote: '', setVote: undefined},
+        {name: '[DR] L.A. Ponomarev', party: Party.DemocraticRussia, vote: '', setVote: undefined},
+        {name: '[DR] S.P.Shustov', party: Party.DemocraticRussia, vote: '', setVote: undefined},
+        {name: '[RD] Sergei N. Yushenkov', party: Party.RadicalDemocrats, vote: '', setVote: undefined},
+        {name: '[Rod] Konstantin G. Bulgakov', party: Party.Rodina, vote: '', setVote: undefined},
+        {name: '[Rod] V .I. Morokin', party: Party.Rodina, vote: '', setVote: undefined},
+        {name: '[CFP] Y.M. Nesterov', party: Party.ConcordForProgress, vote: '', setVote: undefined},
     ]
 
     const votesToGet66 = 546;
@@ -190,6 +194,19 @@ export default function Home() {
     const [vote18, setVote18] = useState<string>('abstain');
     playerParties[18].vote = vote18;
     playerParties[18].setVote = setVote18;
+    const [vote19, setVote19] = useState<string>('abstain');
+    playerParties[19].vote = vote19;
+    playerParties[19].setVote = setVote19;
+    const [vote20, setVote20] = useState<string>('abstain');
+    playerParties[20].vote = vote20;
+    playerParties[20].setVote = setVote20;
+    const [vote21, setVote21] = useState<string>('abstain');
+    playerParties[21].vote = vote21;
+    playerParties[21].setVote = setVote21;
+    const [vote22, setVote22] = useState<string>('abstain');
+    playerParties[22].vote = vote22;
+    playerParties[22].setVote = setVote22;
+
     //endregion
 
     const [votingTally, setVotingTally] = useState<{ party: string, votes: number, fill: string }[]>([]);
