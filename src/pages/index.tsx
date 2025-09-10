@@ -107,28 +107,28 @@ export default function Home() {
         vote: string,
         setVote: undefined | Dispatch<SetStateAction<string>>
     }[] = [
-        {name: '[CoR]  I.P. Rybkin', party: Party.CommunistsOfRussia, vote: '', setVote: undefined},
-        {name: '[CoR]  V. Kalashnikov', party: Party.CommunistsOfRussia, vote: '', setVote: undefined},
-        {name: '[AU] Mikhail I. Lapshin', party: Party.AgrarianUnion, vote: '', setVote: undefined},
-        {name: '[AU] Vladimir S. Zakharov', party: Party.AgrarianUnion, vote: '', setVote: undefined},
-        {name: '[Ros] S.N.Baburin', party: Party.Rossiya, vote: '', setVote: undefined},
-        {name: '[Ros] L.Kh.Bakhtiyarova', party: Party.Rossiya, vote: '', setVote: undefined},
-        {name: '[FL] B.V . Tarasov', party: Party.Fatherland, vote: '', setVote: undefined},
-        {name: '[FL] Gennadiy Matveyevich Benov', party: Party.Fatherland, vote: '', setVote: undefined},
-        {name: '[IU] V .V . Bespalov', party: Party.IndustrialUnion, vote: '', setVote: undefined},
-        {name: '[WU] V.V. Chernov', party: Party.WorkersUnion, vote: '', setVote: undefined},
-        {name: '[CNP] V.A. Shuykov', party: Party.Change, vote: '', setVote: undefined},
-        {name: '[S& E]Polkovnik Bezsmerten', party: Party.SovereigntyAndEquality, vote: '', setVote: undefined},
-        {name: '[FR] V.M. Adrov', party: Party.FreeRussia, vote: '', setVote: undefined},
-        {name: '[FR] I.V . Vinogradova', party: Party.FreeRussia, vote: '', setVote: undefined},
-        {name: '[LoC] K.A. Morozov', party: Party.LeftOfCenter, vote: '', setVote: undefined},
-        {name: '[LoC] V.I. Gerasimov', party: Party.LeftOfCenter, vote: '', setVote: undefined},
-        {name: '[DR] L.A. Ponomarev', party: Party.DemocraticRussia, vote: '', setVote: undefined},
-        {name: '[DR] S.P.Shustov', party: Party.DemocraticRussia, vote: '', setVote: undefined},
-        {name: '[RD] Sergei N. Yushenkov', party: Party.RadicalDemocrats, vote: '', setVote: undefined},
-        {name: '[Rod] Konstantin G. Bulgakov', party: Party.Rodina, vote: '', setVote: undefined},
-        {name: '[Rod] V .I. Morokin', party: Party.Rodina, vote: '', setVote: undefined},
-        {name: '[CFP] Y.M. Nesterov', party: Party.ConcordForProgress, vote: '', setVote: undefined},
+        {name: '[CoR]  I.P. Rybkin', party: Party.CommunistsOfRussia, vote: '', setVote: undefined},                // 00
+        {name: '[CoR]  V. Kalashnikov', party: Party.CommunistsOfRussia, vote: '', setVote: undefined},             // 01
+        {name: '[AU] Mikhail I. Lapshin', party: Party.AgrarianUnion, vote: '', setVote: undefined},                // 02
+        {name: '[AU] Vladimir S. Zakharov', party: Party.AgrarianUnion, vote: '', setVote: undefined},              // 03
+        {name: '[Ros] S.N.Baburin', party: Party.Rossiya, vote: '', setVote: undefined},                            // 04
+        {name: '[Ros] L.Kh.Bakhtiyarova', party: Party.Rossiya, vote: '', setVote: undefined},                      // 05
+        {name: '[FL] B.V . Tarasov', party: Party.Fatherland, vote: '', setVote: undefined},                        // 06
+        {name: '[FL] Gennadiy Matveyevich Benov', party: Party.Fatherland, vote: '', setVote: undefined},           // 07
+        {name: '[IU] V .V . Bespalov', party: Party.IndustrialUnion, vote: '', setVote: undefined},                 // 08
+        {name: '[WU] V.V. Chernov', party: Party.WorkersUnion, vote: '', setVote: undefined},                       // 09
+        {name: '[CNP] V.A. Shuykov', party: Party.Change, vote: '', setVote: undefined},                            // 10
+        {name: '[S& E]Polkovnik Bezsmerten', party: Party.SovereigntyAndEquality, vote: '', setVote: undefined},    // 11
+        {name: '[FR] V.M. Adrov', party: Party.FreeRussia, vote: '', setVote: undefined},                           // 12
+        {name: '[FR] I.V . Vinogradova', party: Party.FreeRussia, vote: '', setVote: undefined},                    // 13
+        {name: '[LoC] K.A. Morozov', party: Party.LeftOfCenter, vote: '', setVote: undefined},                      // 14
+        {name: '[LoC] V.I. Gerasimov', party: Party.LeftOfCenter, vote: '', setVote: undefined},                    // 15
+        {name: '[DR] L.A. Ponomarev', party: Party.DemocraticRussia, vote: '', setVote: undefined},                 // 16
+        {name: '[DR] S.P.Shustov', party: Party.DemocraticRussia, vote: '', setVote: undefined},                    // 17
+        {name: '[RD] Sergei N. Yushenkov', party: Party.RadicalDemocrats, vote: '', setVote: undefined},            // 18
+        {name: '[Rod] Konstantin G. Bulgakov', party: Party.Rodina, vote: '', setVote: undefined},                  // 19
+        {name: '[Rod] V .I. Morokin', party: Party.Rodina, vote: '', setVote: undefined},                           // 20
+        {name: '[CFP] Y.M. Nesterov', party: Party.ConcordForProgress, vote: '', setVote: undefined},               // 21
     ]
 
     const votesToGet66 = 546;
