@@ -67,7 +67,7 @@ export default function Home() {
             members: 1,
             name: 'industrialUnion'
         }],
-        [Party.WorkersUnion, {label: 'Worker\'s Union', votes: 53, color: '#FD3C3C', members: 1, name: 'workersUnion'}],
+        [Party.WorkersUnion, {label: 'Worker\'s Union', votes: 53, color: '#FD3C3C', members: 2, name: 'workersUnion'}],
         [Party.Change, {label: 'Change', votes: 53, color: '#AAAAAA', members: 1, name: 'change'}],
         [Party.Rodina, {label: 'Rodina', votes: 57, color: '#D1923C', members: 2, name: 'rodina'}],
         [Party.SovereigntyAndEquality, {
@@ -119,18 +119,19 @@ export default function Home() {
         {name: '[FL] Gennadiy Matveyevich Benov', party: Party.Fatherland, vote: '', setVote: undefined},           // 07
         {name: '[IU] V .V . Bespalov', party: Party.IndustrialUnion, vote: '', setVote: undefined},                 // 08
         {name: '[WU] V.V. Chernov', party: Party.WorkersUnion, vote: '', setVote: undefined},                       // 09
-        {name: '[CNP] V.A. Shuykov', party: Party.Change, vote: '', setVote: undefined},                            // 10
-        {name: '[S& E]Polkovnik Bezsmerten', party: Party.SovereigntyAndEquality, vote: '', setVote: undefined},    // 11
-        {name: '[FR] V.M. Adrov', party: Party.FreeRussia, vote: '', setVote: undefined},                           // 12
-        {name: '[FR] I.V . Vinogradova', party: Party.FreeRussia, vote: '', setVote: undefined},                    // 13
-        {name: '[LoC] K.A. Morozov', party: Party.LeftOfCenter, vote: '', setVote: undefined},                      // 14
-        {name: '[LoC] V.I. Gerasimov', party: Party.LeftOfCenter, vote: '', setVote: undefined},                    // 15
-        {name: '[DR] L.A. Ponomarev', party: Party.DemocraticRussia, vote: '', setVote: undefined},                 // 16
-        {name: '[DR] S.P.Shustov', party: Party.DemocraticRussia, vote: '', setVote: undefined},                    // 17
-        {name: '[RD] Sergei N. Yushenkov', party: Party.RadicalDemocrats, vote: '', setVote: undefined},            // 18
-        {name: '[Rod] Konstantin G. Bulgakov', party: Party.Rodina, vote: '', setVote: undefined},                  // 19
-        {name: '[Rod] V .I. Morokin', party: Party.Rodina, vote: '', setVote: undefined},                           // 20
-        {name: '[CFP] Y.M. Nesterov', party: Party.ConcordForProgress, vote: '', setVote: undefined},               // 21
+        {name: '[WU] A.S. Kosopkin', party: Party.WorkersUnion, vote: '', setVote: undefined},                      // 10
+        {name: '[CNP] V.A. Shuykov', party: Party.Change, vote: '', setVote: undefined},                            // 11
+        {name: '[S& E]Polkovnik Bezsmerten', party: Party.SovereigntyAndEquality, vote: '', setVote: undefined},    // 12
+        {name: '[FR] V.M. Adrov', party: Party.FreeRussia, vote: '', setVote: undefined},                           // 13
+        {name: '[FR] I.V . Vinogradova', party: Party.FreeRussia, vote: '', setVote: undefined},                    // 14
+        {name: '[LoC] K.A. Morozov', party: Party.LeftOfCenter, vote: '', setVote: undefined},                      // 15
+        {name: '[LoC] V.I. Gerasimov', party: Party.LeftOfCenter, vote: '', setVote: undefined},                    // 16
+        {name: '[DR] L.A. Ponomarev', party: Party.DemocraticRussia, vote: '', setVote: undefined},                 // 17
+        {name: '[DR] S.P.Shustov', party: Party.DemocraticRussia, vote: '', setVote: undefined},                    // 18
+        {name: '[RD] Sergei N. Yushenkov', party: Party.RadicalDemocrats, vote: '', setVote: undefined},            // 19
+        {name: '[Rod] Konstantin G. Bulgakov', party: Party.Rodina, vote: '', setVote: undefined},                  // 20
+        {name: '[Rod] V .I. Morokin', party: Party.Rodina, vote: '', setVote: undefined},                           // 21
+        {name: '[CFP] Y.M. Nesterov', party: Party.ConcordForProgress, vote: '', setVote: undefined},               // 22
     ]
 
     const votesToGet66 = 546;
@@ -206,6 +207,10 @@ export default function Home() {
     const [vote21, setVote21] = useState<string>('abstain');
     playerParties[21].vote = vote21;
     playerParties[21].setVote = setVote21;
+    const [vote22, setVote22] = useState<string>('abstain');
+    playerParties[22].vote = vote22;
+    playerParties[22].setVote = setVote22;
+
 
     //endregion
 
